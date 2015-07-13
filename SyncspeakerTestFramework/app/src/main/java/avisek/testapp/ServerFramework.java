@@ -12,10 +12,10 @@ public class ServerFramework implements Runnable{
 
     @Override
     public void run(){
-        Log.d("Dummy", "Thread me ghus gya!");
+        Log.d("Dummy", "Server is started");
         try {
             ServerSocket ssControlServer = new ServerSocket(5000);
-            Log.d("Dummy", "Breakpoint pass kr lia");
+            Log.d("Dummy", "Server to accept connections");
             while (true) {
                 Socket ssControlClient = ssControlServer.accept();
 

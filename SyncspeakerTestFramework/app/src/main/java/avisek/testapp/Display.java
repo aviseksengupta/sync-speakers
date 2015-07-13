@@ -20,7 +20,7 @@ public class Display extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
-        Log.d("Dummy", "OnCreate Function Gotcha");
+        Log.d("Dummy", "Application Started");
         Runnable serverFramework = new ServerFramework();
         new Thread(serverFramework).start();
     }
