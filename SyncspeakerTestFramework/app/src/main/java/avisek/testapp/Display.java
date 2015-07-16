@@ -1,5 +1,6 @@
 package avisek.testapp;
 
+import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,12 +9,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.os.Handler;
+import android.os.Message;
 
 import java.net.ServerSocket;
 import java.net.Socket;
 
 
 public class Display extends ActionBarActivity {
+
+    static Double skewInMillis;
+
+    //Time Updation Handler
+    public Handler timeUpdationHandler = new Handler(Looper.getMainLooper()){
+        public void handleMessage(String msg)
+        {
+            Message message = this.obtainMessage();
+            TextView timeText = (TextView)findViewById(R.id.curSysTime);
+            Bundle messageBundle = message.getData();
+
+            timeText.setText(messageBundle.getString("time"));
+            Log.d("Dummy", messageBundle.getString("time"));
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +41,9 @@ public class Display extends ActionBarActivity {
         Log.d("Dummy", "Application Started");
         Runnable serverFramework = new ServerFramework();
         new Thread(serverFramework).start();
+
+        Thread updateDisplayedClock = new Thread(new UpdateClock(timeUpdationHandler));
+        updateDisplayedClock.start();
     }
 
     @Override

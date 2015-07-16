@@ -37,5 +37,69 @@
         android:layout_below="@+id/button"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="System Times"
+        android:id="@+id/timeLabel"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/message_view" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Current System Time:   "
+        android:id="@+id/currentSysTimeLabel"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/timeLabel"
+        android:layout_alignStart="@+id/timeLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Offset from last connected server:   "
+        android:id="@+id/timeSkewOffsetLabel"
+        android:layout_below="@+id/currentSysTimeLabel"
+        android:layout_alignStart="@+id/currentSysTimeLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Synchronous Time:   "
+        android:id="@+id/syncTimeLabel"
+        android:layout_below="@+id/timeSkewOffsetLabel"
+        android:layout_alignStart="@+id/timeSkewOffsetLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="&lt;curTime>"
+        android:id="@+id/curSysTime"
+        android:layout_alignTop="@+id/currentSysTimeLabel"
+        android:layout_toEndOf="@+id/currentSysTimeLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="&lt;offset>"
+        android:id="@+id/timeOffset"
+        android:layout_below="@+id/curSysTime"
+        android:layout_toEndOf="@+id/timeSkewOffsetLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="&lt;synctime>"
+        android:id="@+id/syncTime"
+        android:layout_below="@+id/timeSkewOffsetLabel"
+        android:layout_toEndOf="@+id/syncTimeLabel" />
+
 
 </RelativeLayout>
