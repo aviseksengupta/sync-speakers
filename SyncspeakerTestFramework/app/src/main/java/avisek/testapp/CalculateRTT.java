@@ -18,15 +18,19 @@ import java.util.Date;
 public class CalculateRTT extends AsyncTask<Object, Void, Double> {
 
     Object message;
+    Double lastRTT;
     @Override
     protected Double doInBackground(Object... params) {
         try
         {
             String remoteaddr = (String)params[0];
             message = params[1];
+            lastRTT = (Double)params[2];
             Socket rttClient = new Socket(remoteaddr, 5000);
             PrintWriter rttOutput = new PrintWriter(rttClient.getOutputStream(), true);
             BufferedReader rttInput = new BufferedReader(new InputStreamReader(rttClient.getInputStream()));
+
+            rttOutput.println("RTT");
             int i = 10;
             long avgRTT = 0;
             while(i>0)
@@ -61,5 +65,6 @@ public class CalculateRTT extends AsyncTask<Object, Void, Double> {
             Double rttMessage = (Double) message;
             rttMessage = rtt;
         }
+        lastRTT = rtt;
     }
 }

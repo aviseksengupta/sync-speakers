@@ -44,16 +44,18 @@ public class UpdateClock implements Runnable{
             try
             {
                 Long timeInMillis = System.currentTimeMillis();
-
+                //Long syncedTime = System.currentTimeMillis();
 //                Bundle bundle = new Bundle();
 //                bundle.putString("time", timeInMillis.toString());
 //                Message message = new Message();
 //                message.setData(bundle);
 //                timeUpdateHandler.sendMessage(message);
 
-                Log.d("Dummy", "TIme is "+timeInMillis.toString());
+                Log.d("Dummy", "Time is "+timeInMillis.toString());
                 Message message = timeUpdateHandler.obtainMessage(1, timeInMillis.toString());
                 message.sendToTarget();
+                //Message message1 = timeUpdateHandler.obtainMessage(1, syncedTime.toString());
+                //message1.sendToTarget();
                 Thread.sleep(500);
             }
             catch(Exception e)

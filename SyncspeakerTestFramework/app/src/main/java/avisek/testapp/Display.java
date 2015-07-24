@@ -12,13 +12,16 @@ import android.widget.TextView;
 import android.os.Handler;
 import android.os.Message;
 
+import org.w3c.dom.Text;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 
 
 public class Display extends ActionBarActivity {
 
-    static Double skewInMillis;
+    static Double lastRTT;
+    static Double skew;
 
     //Time Updation Handler
     public Handler timeUpdationHandler = new Handler(Looper.getMainLooper()){
@@ -26,15 +29,22 @@ public class Display extends ActionBarActivity {
         {
             String message = (String)msg.obj;
             TextView timeText = (TextView)findViewById(R.id.curSysTime);
-
-            timeText.setText(message+ "HELLO!!");
-            Log.d("Dummy", "debug thy lord: "+message);
+            //String message1 = (String)msg.obj;
+            TextView syncedTimeText = (TextView)findViewById(R.id.syncTime);
+            Long syncedTime = Math.round(Long.parseLong(message) + skew);
+            timeText.setText(message);
+            syncedTimeText.setText(syncedTime.toString());
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Initialize globals
+        lastRTT = new Double(0);
+        skew = new Double(0);
+
         setContentView(R.layout.activity_display);
 
         Log.d("Dummy", "Application Started");
@@ -73,6 +83,13 @@ public class Display extends ActionBarActivity {
         String remoteAddr = remoteAddrInput.getText().toString();
         TextView messageDisp = (TextView)findViewById(R.id.message_view);
         messageDisp.setText("Calculating... ");
-        new CalculateRTT().execute(new Object[]{remoteAddr, messageDisp});
+        TextView offsetDisp = (TextView)findViewById(R.id.timeOffset);
+        new CalculateRTT().execute(new Object[]{remoteAddr, messageDisp, lastRTT});
+    }
+
+    public void updateSkew(View view)
+    {
+        EditText remoteAddrInput = (EditText)findViewById(R.id.ipaddr);
+        String remoteAddr = remoteAddrInput.getText().toString();
     }
 }

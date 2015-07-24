@@ -2,6 +2,9 @@ package avisek.testapp;
 
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,10 +21,20 @@ public class ServerFramework implements Runnable{
             Log.d("Dummy", "Server to accept connections");
             while (true) {
                 Socket ssControlClient = ssControlServer.accept();
-
-                Runnable echoserver = new EchoServer(ssControlClient);
-                Thread echoServerThread = new Thread(echoserver);
-                echoServerThread.start();
+                BufferedReader readFromClient = new BufferedReader(new InputStreamReader(ssControlClient.getInputStream()));
+                String initMessage = readFromClient.readLine();
+                if(initMessage.equalsIgnoreCase("RTT"))
+                {
+                    Runnable echoserver = new EchoServer(ssControlClient);
+                    Thread echoServerThread = new Thread(echoserver);
+                    echoServerThread.start();
+                }
+                else if(initMessage.equalsIgnoreCase("TIME"))
+                {
+                    Runnable timeserver = new TimeServer(ssControlClient);
+                    Thread timeserverThread = new Thread(timeserver);
+                    timeserverThread.start();
+                }
                 Thread.currentThread().sleep(100);
             }
         } catch (Exception e) {
