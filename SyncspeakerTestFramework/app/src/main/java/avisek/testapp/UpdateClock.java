@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 /**
  * Created by user on 16/07/15.
@@ -44,12 +45,15 @@ public class UpdateClock implements Runnable{
             {
                 Long timeInMillis = System.currentTimeMillis();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("time", timeInMillis.toString());
-                Message message = new Message();
-                message.setData(bundle);
-                timeUpdateHandler.sendMessage(message);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("time", timeInMillis.toString());
+//                Message message = new Message();
+//                message.setData(bundle);
+//                timeUpdateHandler.sendMessage(message);
 
+                Log.d("Dummy", "TIme is "+timeInMillis.toString());
+                Message message = timeUpdateHandler.obtainMessage(1, timeInMillis.toString());
+                message.sendToTarget();
                 Thread.sleep(500);
             }
             catch(Exception e)

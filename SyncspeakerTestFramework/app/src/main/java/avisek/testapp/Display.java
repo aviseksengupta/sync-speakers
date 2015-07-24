@@ -22,14 +22,13 @@ public class Display extends ActionBarActivity {
 
     //Time Updation Handler
     public Handler timeUpdationHandler = new Handler(Looper.getMainLooper()){
-        public void handleMessage(String msg)
+        public void handleMessage(Message msg)
         {
-            Message message = this.obtainMessage();
+            String message = (String)msg.obj;
             TextView timeText = (TextView)findViewById(R.id.curSysTime);
-            Bundle messageBundle = message.getData();
 
-            timeText.setText(messageBundle.getString("time"));
-            Log.d("Dummy", messageBundle.getString("time"));
+            timeText.setText(message+ "HELLO!!");
+            Log.d("Dummy", "debug thy lord: "+message);
         }
     };
 
