@@ -51,7 +51,7 @@ public class UpdateClock implements Runnable{
 //                message.setData(bundle);
 //                timeUpdateHandler.sendMessage(message);
 
-                Log.d("Dummy", "Time is "+timeInMillis.toString());
+                //og.d("Dummy", "Time is "+timeInMillis.toString());
                 Message message = timeUpdateHandler.obtainMessage(1, timeInMillis.toString());
                 message.sendToTarget();
                 //Message message1 = timeUpdateHandler.obtainMessage(1, syncedTime.toString());

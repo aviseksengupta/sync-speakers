@@ -3,7 +3,8 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Display">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Display"
+    android:id="@+id/layout">
 
     <!--<TextView android:text="@string/welcome_string" android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content" />-->
@@ -24,7 +25,6 @@
         android:text="@string/connect_string"
         android:onClick="calcRTT"
         android:id="@+id/button"
-        android:layout_marginTop="28dp"
         android:layout_below="@+id/ipaddr"
         android:layout_centerHorizontal="true" />
 
@@ -33,7 +33,6 @@
         android:layout_height="wrap_content"
         android:text="Connect to server to calculate Round Trip Time"
         android:id="@+id/message_view"
-        android:layout_marginTop="34dp"
         android:layout_below="@+id/button"
         android:layout_centerHorizontal="true" />
 
@@ -44,7 +43,7 @@
         android:text="System Times"
         android:id="@+id/timeLabel"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/message_view" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,9 +51,9 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Current System Time:   "
         android:id="@+id/currentSysTimeLabel"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="41dp"
         android:layout_below="@+id/timeLabel"
-        android:layout_alignStart="@+id/timeLabel" />
+        android:layout_alignEnd="@+id/button" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,7 +62,7 @@
         android:text="Offset from last connected server:   "
         android:id="@+id/timeSkewOffsetLabel"
         android:layout_below="@+id/currentSysTimeLabel"
-        android:layout_alignStart="@+id/currentSysTimeLabel" />
+        android:layout_alignRight="@+id/button" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -72,7 +71,7 @@
         android:text="Synchronous Time:   "
         android:id="@+id/syncTimeLabel"
         android:layout_below="@+id/timeSkewOffsetLabel"
-        android:layout_alignStart="@+id/timeSkewOffsetLabel" />
+        android:layout_alignRight="@+id/button" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -81,7 +80,7 @@
         android:text="&lt;curTime>"
         android:id="@+id/curSysTime"
         android:layout_alignTop="@+id/currentSysTimeLabel"
-        android:layout_toEndOf="@+id/currentSysTimeLabel" />
+        android:layout_toEndOf="@+id/syncTimeLabel" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -89,8 +88,8 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="&lt;offset>"
         android:id="@+id/timeOffset"
-        android:layout_below="@+id/curSysTime"
-        android:layout_toEndOf="@+id/timeSkewOffsetLabel" />
+        android:layout_below="@+id/currentSysTimeLabel"
+        android:layout_toEndOf="@+id/syncTimeLabel" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -98,8 +97,17 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="&lt;synctime>"
         android:id="@+id/syncTime"
-        android:layout_below="@+id/timeSkewOffsetLabel"
-        android:layout_toEndOf="@+id/syncTimeLabel" />
+        android:layout_below="@+id/timeOffset"
+        android:layout_toEndOf="@+id/timeSkewOffsetLabel" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calc_skew_string"
+        android:id="@+id/button2"
+        android:layout_below="@+id/message_view"
+        android:layout_centerHorizontal="true"
+        android:onClick=""/>
 
 
 </RelativeLayout>

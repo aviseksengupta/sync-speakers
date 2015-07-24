@@ -91,5 +91,7 @@ public class Display extends ActionBarActivity {
     {
         EditText remoteAddrInput = (EditText)findViewById(R.id.ipaddr);
         String remoteAddr = remoteAddrInput.getText().toString();
+
+        new SyncTime().execute(new Object[]{remoteAddr, skew, lastRTT});
     }
 }
