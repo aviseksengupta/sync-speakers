@@ -4,6 +4,7 @@ import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.MutableDouble;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +21,8 @@ import java.net.Socket;
 
 public class Display extends ActionBarActivity {
 
-    static Double lastRTT;
-    static Double skew;
+    static MutableDouble lastRTT;
+    static MutableDouble skew;
 
     //Time Updation Handler
     public Handler timeUpdationHandler = new Handler(Looper.getMainLooper()){
@@ -31,7 +32,8 @@ public class Display extends ActionBarActivity {
             TextView timeText = (TextView)findViewById(R.id.curSysTime);
             //String message1 = (String)msg.obj;
             TextView syncedTimeText = (TextView)findViewById(R.id.syncTime);
-            Long syncedTime = Math.round(Long.parseLong(message) + skew);
+            Long syncedTime = Math.round(Long.parseLong(message) + skew.value);
+            Log.d("Dummy", "Skew is "+skew.value+" So system time "+message+" becomes "+syncedTime);
             timeText.setText(message);
             syncedTimeText.setText(syncedTime.toString());
         }
@@ -42,8 +44,8 @@ public class Display extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         //Initialize globals
-        lastRTT = new Double(0);
-        skew = new Double(0);
+        lastRTT = new MutableDouble(0.0);
+        skew = new MutableDouble(0.0);
 
         setContentView(R.layout.activity_display);
 
@@ -93,5 +95,11 @@ public class Display extends ActionBarActivity {
         String remoteAddr = remoteAddrInput.getText().toString();
 
         new SyncTime().execute(new Object[]{remoteAddr, skew, lastRTT});
+
+        if(skew!=null)
+        {
+            TextView offsetView = (TextView)findViewById(R.id.timeOffset);
+            offsetView.setText(skew.toString());
+        }
     }
 }

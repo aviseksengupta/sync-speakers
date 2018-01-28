@@ -107,7 +107,7 @@
         android:id="@+id/button2"
         android:layout_below="@+id/message_view"
         android:layout_centerHorizontal="true"
-        android:onClick=""/>
+        android:onClick="updateSkew"/>
 
 
 </RelativeLayout>
